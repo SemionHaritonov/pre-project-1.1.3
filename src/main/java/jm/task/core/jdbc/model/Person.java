@@ -1,13 +1,13 @@
 package jm.task.core.jdbc.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import javax.persistence.Entity;
 
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+//@Table(name = "users")
+public class Person {
     @Id
+    //@PrimaryKeyJoinColumn
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
@@ -21,11 +21,11 @@ public class User implements Serializable {
     @Column(name = "age")
     private Byte age;
 
-    public User() {
+    public Person() {
 
     }
 
-    public User(String name, String lastName, Byte age) {
+    public Person(String name, String lastName, Byte age) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;

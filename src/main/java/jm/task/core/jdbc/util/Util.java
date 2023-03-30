@@ -1,7 +1,6 @@
 package jm.task.core.jdbc.util;
 
-import jm.task.core.jdbc.model.User;
-import org.hibernate.SessionFactory;
+import jm.task.core.jdbc.model.Person;
 import org.hibernate.cfg.Configuration;
 
 import java.lang.reflect.InvocationTargetException;
@@ -10,7 +9,7 @@ import java.sql.*;
 
 public class Util {
     private static final String hibernate_show_sql = "false";
-    private static final String hibernate_hbm2ddl_auto = "update";
+    private static final String hibernate_hbm2ddl_auto = "create";
     private static final String user = "test";
     private static final String password = "test";
 
@@ -28,7 +27,6 @@ public class Util {
                     append(user).
                     append("&password=").
                     append(password);
-            System.out.println("URL: " + url + "\n");
             return DriverManager.getConnection(url.toString());
         } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -40,7 +38,7 @@ public class Util {
 
     public static Configuration getPostgresConfiguration() {
         Configuration configuration = new org.hibernate.cfg.Configuration();
-        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Person.class);
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         configuration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
         configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://" +
