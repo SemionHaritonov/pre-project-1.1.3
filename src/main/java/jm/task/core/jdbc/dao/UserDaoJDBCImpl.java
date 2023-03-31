@@ -1,13 +1,11 @@
 package jm.task.core.jdbc.dao;
 
-import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.model.Person;
 import jm.task.core.jdbc.util.Executor;
 import jm.task.core.jdbc.util.Util;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,18 +57,18 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public List<User> getAllUsers() {
+    public List<Person> getAllUsers() {
         try {
             return executor.execQuery("select * from users ", result -> {
-                List<User> resultUsers = new ArrayList<>();
+                List<Person> resultPeople = new ArrayList<>();
                 while (result.next()) {
-                    User user = new User(result.getString("name"),
+                    Person person = new Person(result.getString("name"),
                             result.getString("lastName"),
                             result.getByte("age"));
-                    user.setId(result.getLong("id"));
-                    resultUsers.add(user);
+                    person.setId(result.getLong("id"));
+                    resultPeople.add(person);
                 }
-                return resultUsers;
+                return resultPeople;
             });
         } catch (SQLException e) {
             throw new RuntimeException(e);
